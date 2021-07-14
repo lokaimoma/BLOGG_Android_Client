@@ -4,10 +4,7 @@ import com.koc.blogg.model.remote.Blog
 import com.koc.blogg.model.remote.UserGet
 import com.koc.blogg.model.remote.UserLogin
 import com.koc.blogg.model.remote.UserPost
-import retrofit2.http.Body
-import retrofit2.http.Field
-import retrofit2.http.Header
-import retrofit2.http.POST
+import retrofit2.http.*
 
 /**
 Created by kelvin_clark on 7/14/2021 5:54 PM
@@ -33,5 +30,10 @@ interface BloggService {
         @Header("Content-Type") contentType: String = "application/json"
     ): Blog
 
-
+    @PUT("blog/update/{blog_id}")
+    suspend fun updateBlog(
+        @Path("blog_id") blogId: Int,
+        @Body body: Blog,
+        @Header("Content-Type") contentType: String = "application/json"
+    ): Blog
 }
