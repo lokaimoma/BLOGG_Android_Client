@@ -1,0 +1,17 @@
+package com.koc.blogg.model.remote
+
+
+import com.google.gson.annotations.SerializedName
+
+data class BlogItem(
+    @SerializedName("body")
+    val body: String,
+    @SerializedName("created_date")
+    val createdDate: String,
+    @SerializedName("last_updated")
+    val lastUpdated: String,
+    @SerializedName("title")
+    val title: String,
+    @SerializedName("user_id")
+    val userId: Int
+)
