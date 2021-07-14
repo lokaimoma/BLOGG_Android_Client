@@ -53,5 +53,16 @@ interface BloggService {
         @Path("blog_id") blogId: Int
     ): String
 
+    // Engagement Endpoint
+    @POST("engagement/insert")
+    suspend fun insertEngagement(
+        @Body engagement: Engagement,
+        @Header("Content-Type") contentType: String = "application/json"
+    ): Engagement
 
+    @POST("engagement/update")
+    suspend fun updateEngagement(
+        @Body engagement: Engagement,
+        @Header("Content-Type") contentType: String = "application/json"
+    ): Engagement
 }
