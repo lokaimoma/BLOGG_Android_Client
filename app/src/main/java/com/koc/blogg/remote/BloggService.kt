@@ -1,9 +1,6 @@
 package com.koc.blogg.remote
 
-import com.koc.blogg.model.remote.Blog
-import com.koc.blogg.model.remote.UserGet
-import com.koc.blogg.model.remote.UserLogin
-import com.koc.blogg.model.remote.UserPost
+import com.koc.blogg.model.remote.*
 import retrofit2.http.*
 
 /**
@@ -36,4 +33,25 @@ interface BloggService {
         @Body body: Blog,
         @Header("Content-Type") contentType: String = "application/json"
     ): Blog
+
+    @GET("blog/")
+    suspend fun getAllBlogs(): List<Blog>
+
+    @GET("blog/user_blogs/{user_id}")
+    suspend fun getAllUserBlogs(
+        @Path("user_id") userId: Int
+    ): List<Blog>
+
+    @GET("blog/{blog_id}")
+    suspend fun getBlogDetails(
+        @Path("blog_id") blogId: Int,
+        @Query("current_user_id") currentUserId: Int
+    ): BlogDetails
+
+    @DELETE("blog/delete/{blog_id}")
+    suspend fun deleteBlog(
+        @Path("blog_id") blogId: Int
+    ): String
+
+
 }
