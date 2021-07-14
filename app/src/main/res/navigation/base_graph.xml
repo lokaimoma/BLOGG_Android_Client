@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/base_graph"
+    app:startDestination="@id/loginScreen3">
+    <fragment
+        android:id="@+id/loginScreen3"
+        android:name="com.koc.view.loginScreen.LoginScreen"
+        android:label="LoginScreen" />
+</navigation>
