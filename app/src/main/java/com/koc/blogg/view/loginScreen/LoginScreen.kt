@@ -6,10 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.koc.blogg.databinding.LoginScreenBinding
+import dagger.hilt.android.AndroidEntryPoint
 
 /**
 Created by kelvin_clark on 7/14/2021 6:36 PM
  */
+@AndroidEntryPoint
 class LoginScreen: Fragment() {
     private var _binding: LoginScreenBinding? = null
     private val binding
