@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.koc.blogg.repository.BloggRepository
 import com.koc.blogg.util.LoginEvent
+import com.koc.blogg.util.PreferenceManager
 import com.koc.blogg.util.ResponseState
 import com.koc.blogg.util.exhaustive
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -18,7 +19,8 @@ Created by kelvin_clark on 7/15/2021 1:28 AM
  */
 @HiltViewModel
 class LoginScreenViewModel @Inject constructor(
-    private val repository: BloggRepository
+    private val repository: BloggRepository,
+    private val preferenceManager: PreferenceManager
 ) : ViewModel() {
 
     var email = ""
@@ -30,6 +32,11 @@ class LoginScreenViewModel @Inject constructor(
     fun loginUser() = viewModelScope.launch(IO) {
         when (val result = repository.loginUser(email=email, password=password)) {
             is ResponseState.Success -> {
+                preferenceManager.apply {
+                    updateUserId(result.data!!.id)
+                    updateUserEmail(result.data.email)
+                    updateUserName(result.data.username)
+                }
                 loginEventChannel.send(LoginEvent.LoginSuccessFull(userId = result.data!!.id))
             }
             is ResponseState.Error -> {
