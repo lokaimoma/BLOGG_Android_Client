@@ -6,6 +6,6 @@
 
     <fragment
         android:id="@+id/loginScreen"
-        android:name="com.koc.view.loginScreen.LoginScreen"
+        android:name="com.koc.blogg.view.loginScreen.LoginScreen"
         android:label="Login" />
 </navigation>
