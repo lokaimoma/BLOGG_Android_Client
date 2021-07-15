@@ -1,4 +1,4 @@
-package com.koc.view
+package com.koc.blogg.view
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

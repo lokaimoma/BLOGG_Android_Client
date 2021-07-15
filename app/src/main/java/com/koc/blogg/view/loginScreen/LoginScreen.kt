@@ -1,4 +1,4 @@
-package com.koc.view.loginScreen
+package com.koc.blogg.view.loginScreen
 
 import android.os.Bundle
 import android.view.LayoutInflater
