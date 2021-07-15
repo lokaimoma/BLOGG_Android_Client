@@ -63,7 +63,7 @@ class LoginScreen: Fragment() {
 
                 is LoginEvent.ErrorLogin -> {
                     Snackbar.make(requireContext(), binding.root,
-                        "Error logging in user",
+                        event.message,
                         Snackbar.LENGTH_SHORT).show()
                 }
             }.exhaustive

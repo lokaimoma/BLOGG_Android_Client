@@ -33,7 +33,7 @@ class LoginScreenViewModel @Inject constructor(
                 loginEventChannel.send(LoginEvent.LoginSuccessFull(userId = result.data!!.id))
             }
             is ResponseState.Error -> {
-                loginEventChannel.send(LoginEvent.ErrorLogin)
+                loginEventChannel.send(LoginEvent.ErrorLogin(result.message!!))
             }
         }.exhaustive
     }
