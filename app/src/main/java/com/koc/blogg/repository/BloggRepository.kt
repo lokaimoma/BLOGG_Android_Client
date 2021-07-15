@@ -23,6 +23,8 @@ class BloggRepository @Inject constructor(private val api: BloggService) {
                     var message = ""
                     if (code == 500) {
                         message = "Server Error"
+                    }else if (code == 404) {
+                        message = "Email may not be registered or password is incorrect"
                     }
                     ResponseState.Error<UserLogin>(message = message)
                 }
