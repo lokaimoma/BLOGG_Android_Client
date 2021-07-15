@@ -15,8 +15,9 @@ class BloggRepository @Inject constructor(private val api: BloggService) {
         return try {
             val result = api.loginUser(email = email, password = password)
             ResponseState.Success(data = result)
-        }catch (e: HttpException){
-            ResponseState.Error(message = e.message())
+        }catch (e: Exception){
+            e.printStackTrace()
+            ResponseState.Error(message = e.toString())
         }
     }
 }
