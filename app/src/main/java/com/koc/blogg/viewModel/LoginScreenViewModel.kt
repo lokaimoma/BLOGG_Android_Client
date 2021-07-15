@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.koc.blogg.repository.BloggRepository
 import com.koc.blogg.util.LoginEvent
 import com.koc.blogg.util.ResponseState
+import com.koc.blogg.util.exhaustive
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.channels.Channel
@@ -34,6 +35,6 @@ class LoginScreenViewModel @Inject constructor(
             is ResponseState.Error -> {
                 loginEventChannel.send(LoginEvent.ErrorLogin)
             }
-        }
+        }.exhaustive
     }
 }

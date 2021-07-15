@@ -7,3 +7,6 @@ sealed class LoginEvent {
     data class LoginSuccessFull(val userId: Int): LoginEvent()
     object ErrorLogin: LoginEvent()
 }
+
+val <T> T.exhaustive: T
+    get() = this
