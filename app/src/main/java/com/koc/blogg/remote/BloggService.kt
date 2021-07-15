@@ -14,10 +14,11 @@ interface BloggService {
         @Header("Content-Type") contentType: String = "application/json"
     ): UserGet
 
+
     @POST("user/login")
     suspend fun loginUser(
-        @Field("email") email: String,
-        @Field("password") password: String
+        @Query("email") email: String,
+        @Query("password") password: String
     ): UserLogin
 
     // Blog Endpoints

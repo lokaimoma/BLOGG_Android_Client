@@ -7,10 +7,14 @@ import android.view.ViewGroup
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
+import com.google.android.material.snackbar.Snackbar
 import com.koc.blogg.databinding.LoginScreenBinding
+import com.koc.blogg.util.LoginEvent
+import com.koc.blogg.util.exhaustive
 import com.koc.blogg.viewModel.LoginScreenViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
+import kotlinx.coroutines.flow.collect
 
 /**
 Created by kelvin_clark on 7/14/2021 6:36 PM
@@ -39,9 +43,31 @@ class LoginScreen: Fragment() {
         binding.apply {
             etEmail.setText(viewModel.email)
             etPassword.setText(viewModel.password)
+            loginBtn.setOnClickListener {
+                viewModel.loginUser()
+            }
         }
 
         saveFormState()
+        monitorEvents()
+    }
+
+    private fun monitorEvents() = viewLifecycleOwner.lifecycleScope.launchWhenCreated {
+        viewModel.loginEvent.collect { event: LoginEvent ->
+            when(event) {
+                is LoginEvent.LoginSuccessFull -> {
+                    Snackbar.make(requireContext(), binding.root,
+                        "Login Successful User Id: ${event.userId}",
+                        Snackbar.LENGTH_SHORT).show()
+                }
+
+                is LoginEvent.ErrorLogin -> {
+                    Snackbar.make(requireContext(), binding.root,
+                        event.message,
+                        Snackbar.LENGTH_SHORT).show()
+                }
+            }.exhaustive
+        }
     }
 
     private fun saveFormState() {
