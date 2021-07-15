@@ -43,6 +43,9 @@ class LoginScreen: Fragment() {
         binding.apply {
             etEmail.setText(viewModel.email)
             etPassword.setText(viewModel.password)
+            loginBtn.setOnClickListener {
+                viewModel.loginUser()
+            }
         }
 
         saveFormState()

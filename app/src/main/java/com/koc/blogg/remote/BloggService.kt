@@ -14,6 +14,7 @@ interface BloggService {
         @Header("Content-Type") contentType: String = "application/json"
     ): UserGet
 
+    @FormUrlEncoded
     @POST("user/login")
     suspend fun loginUser(
         @Field("email") email: String,
