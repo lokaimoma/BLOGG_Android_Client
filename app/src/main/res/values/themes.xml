@@ -18,4 +18,8 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
+
+    <style name="BloggNoActionBar.SplashScreen" parent="BloggNoActionBar">
+        <item name="android:windowTranslucentStatus">true</item>
+    </style>
 </resources>
