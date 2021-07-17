@@ -17,9 +17,10 @@
     <style name="BloggNoActionBar" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="android:windowTranslucentStatus">true</item>
     </style>
 
     <style name="BloggNoActionBar.SplashScreen" parent="BloggNoActionBar">
-        <item name="android:windowTranslucentStatus">true</item>
+        <!--   Apply layer list     -->
     </style>
 </resources>

@@ -9,7 +9,9 @@ import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
+import com.koc.blogg.R
 import com.koc.blogg.databinding.LoginScreenBinding
 import com.koc.blogg.util.LoginEvent
 import com.koc.blogg.util.exhaustive
@@ -48,6 +50,9 @@ class LoginScreen: Fragment() {
             etPassword.setText(viewModel.password)
             loginBtn.setOnClickListener {
                 viewModel.loginUser()
+            }
+            signUp.setOnClickListener {
+                findNavController().navigate(R.id.loginScreen_to_signUpScreen)
             }
         }
 

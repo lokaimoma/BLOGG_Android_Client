@@ -18,14 +18,6 @@ class AuthenticationActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityAuthenticationBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-
-        val toolbar: Toolbar = binding.toolbar
-
-        val navHost = supportFragmentManager.findFragmentById(R.id.fragment_host) as NavHostFragment
-        val navController = navHost.navController
-        val appBarConfig = AppBarConfiguration(navController.graph)
-        toolbar.setupWithNavController(navController, appBarConfig)
     }
 
 }
