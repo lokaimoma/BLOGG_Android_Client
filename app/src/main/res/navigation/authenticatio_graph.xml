@@ -22,7 +22,11 @@
         <action
             android:id="@+id/signUpScreen_to_loginScreen"
             app:destination="@id/loginScreen"
+            app:enterAnim="@android:anim/slide_out_right"
+            app:exitAnim="@android:anim/slide_in_left"
             app:launchSingleTop="true"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"
             app:popUpTo="@id/loginScreen"
             app:popUpToInclusive="true" />
     </fragment>
