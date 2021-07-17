@@ -35,7 +35,7 @@ class SplashScreen: AppCompatActivity() {
         preferenceManager.userId.first {userId ->
             if (userId == null) {
                 val intent = Intent(this@SplashScreen, LoginSignUpActivity::class.java)
-                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
                 startActivity(intent)
             }
             true
