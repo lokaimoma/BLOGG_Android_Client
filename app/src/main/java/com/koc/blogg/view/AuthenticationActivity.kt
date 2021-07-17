@@ -12,7 +12,7 @@ import com.koc.blogg.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class LoginSignUpActivity : AppCompatActivity() {
+class AuthenticationActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {

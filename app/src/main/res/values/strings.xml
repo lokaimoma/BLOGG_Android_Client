@@ -8,4 +8,8 @@
     <string name="login">Login</string>
     <string name="background_image">background image</string>
     <string name="please_wait">Please wait</string>
+    <string name="confirm_password">Confirm password</string>
+    <string name="to_login">to login</string>
+    <string name="sign_up">Sign up</string>
+    <string name="username">Username</string>
 </resources>
