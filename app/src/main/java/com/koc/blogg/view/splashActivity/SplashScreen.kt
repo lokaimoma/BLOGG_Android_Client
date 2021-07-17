@@ -1,15 +1,17 @@
 package com.koc.blogg.view.splashActivity
 
-import android.animation.ObjectAnimator
-import android.animation.PropertyValuesHolder
+import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import com.koc.blogg.databinding.SplashScreenBinding
+import com.koc.blogg.util.PreferenceManager
+import com.koc.blogg.view.LoginSignUpActivity
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 /**
 Created by kelvin_clark on 7/16/2021 12:18 AM
@@ -18,21 +20,25 @@ Created by kelvin_clark on 7/16/2021 12:18 AM
 class SplashScreen: AppCompatActivity() {
 
     private lateinit var binding: SplashScreenBinding
+    @Inject
+    lateinit var preferenceManager: PreferenceManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = SplashScreenBinding.inflate(layoutInflater)
 
         setContentView(binding.root)
+        checkIfUserIsRegistered()
+    }
 
-        val scaleX = PropertyValuesHolder.ofFloat(View.SCALE_X, 1.3f)
-        val scaleY = PropertyValuesHolder.ofFloat(View.SCALE_Y, 1.3f)
-        val animator = ObjectAnimator.ofPropertyValuesHolder(binding.logo, scaleX, scaleY)
-        animator.apply {
-            duration = 500
-            repeatCount = ObjectAnimator.INFINITE
-            repeatMode = ObjectAnimator.REVERSE
-            start()
+    private fun checkIfUserIsRegistered() = lifecycleScope.launch(IO) {
+        preferenceManager.userId.first {userId ->
+            if (userId == null) {
+                val intent = Intent(this@SplashScreen, LoginSignUpActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
+                startActivity(intent)
+            }
+            true
         }
     }
 
