@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ProgressBar
 import androidx.core.view.isVisible
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
@@ -81,9 +80,25 @@ class LoginScreen: Fragment() {
                     }else {
                         progressView = binding.progressStub.inflate()
                     }
+                    clearErrors()
                     toggleFormFields()
                 }
+
+                is LoginEvent.InvalidPassword -> {
+                    binding.etPassword.error = "Password can't be empty"
+                }
+
+                is LoginEvent.InvalidEmail -> {
+                    binding.etEmail.error = "Enter valid email"
+                }
             }.exhaustive
+        }
+    }
+
+    private fun clearErrors() {
+        binding.apply {
+            etEmail.error = null
+            etPassword.error = null
         }
     }
 
