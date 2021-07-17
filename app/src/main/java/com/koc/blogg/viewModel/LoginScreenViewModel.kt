@@ -3,6 +3,7 @@ package com.koc.blogg.viewModel
 import android.util.Patterns
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.koc.blogg.model.remote.UserLogin
 import com.koc.blogg.repository.BloggRepository
 import com.koc.blogg.util.LoginEvent
 import com.koc.blogg.util.PreferenceManager
@@ -35,12 +36,8 @@ class LoginScreenViewModel @Inject constructor(
             loginEventChannel.send(LoginEvent.ProcessingAuthentication)
             when (val result = repository.loginUser(email=email, password=password)) {
                 is ResponseState.Success -> {
-                    preferenceManager.apply {
-                        updateUserId(result.data!!.id)
-                        updateUserEmail(result.data.email)
-                        updateUserName(result.data.username)
-                    }
-                    loginEventChannel.send(LoginEvent.LoginSuccessFull(userId = result.data!!.id))
+                    saveCredentials(result.data!!)
+                    loginEventChannel.send(LoginEvent.LoginSuccessFull(userId = result.data.id))
                 }
                 is ResponseState.Error -> {
                     loginEventChannel.send(LoginEvent.ErrorLogin(result.message!!))
@@ -60,5 +57,13 @@ class LoginScreenViewModel @Inject constructor(
             loginEventChannel.send(LoginEvent.InvalidPassword)
 
         return emailIsValid && passwordIsValid
+    }
+
+    private suspend fun saveCredentials(data: UserLogin) {
+        preferenceManager.apply {
+            updateUserId(data.id)
+            updateUserEmail(data.email)
+            updateUserName(data.username)
+        }
     }
 }
