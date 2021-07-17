@@ -2,18 +2,10 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/base_graph"
-    app:startDestination="@id/splashScreen">
+    app:startDestination="@id/loginScreen">
 
     <fragment
         android:id="@+id/loginScreen"
         android:name="com.koc.blogg.view.loginScreen.LoginScreen"
         android:label="Login" />
-    <fragment
-        android:id="@+id/splashScreen"
-        android:name="com.koc.blogg.view.splashScreen.SplashScreen"
-        android:label="SplashScreen" >
-        <action
-            android:id="@+id/action_splashScreen_to_loginScreen"
-            app:destination="@id/loginScreen" />
-    </fragment>
 </navigation>
