@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.koc.blogg.databinding.SplashScreenBinding
 import com.koc.blogg.util.PreferenceManager
-import com.koc.blogg.view.LoginSignUpActivity
+import com.koc.blogg.view.AuthenticationActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.flow.first
@@ -34,7 +34,7 @@ class SplashScreen: AppCompatActivity() {
     private fun checkIfUserIsRegistered() = lifecycleScope.launch(IO) {
         preferenceManager.userId.first {userId ->
             if (userId == null) {
-                val intent = Intent(this@SplashScreen, LoginSignUpActivity::class.java)
+                val intent = Intent(this@SplashScreen, AuthenticationActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
                 startActivity(intent)
             }
