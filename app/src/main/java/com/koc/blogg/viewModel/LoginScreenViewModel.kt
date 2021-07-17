@@ -30,6 +30,7 @@ class LoginScreenViewModel @Inject constructor(
     val loginEvent = loginEventChannel.receiveAsFlow()
 
     fun loginUser() = viewModelScope.launch(IO) {
+        loginEventChannel.send(LoginEvent.ProcessingAuthentication)
         when (val result = repository.loginUser(email=email, password=password)) {
             is ResponseState.Success -> {
                 preferenceManager.apply {

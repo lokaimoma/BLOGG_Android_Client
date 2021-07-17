@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
+import androidx.core.view.isVisible
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -28,6 +30,8 @@ class LoginScreen: Fragment() {
     private var _binding: LoginScreenBinding? = null
     private val binding
         get() = _binding!!
+
+    private var progressView: View? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -56,17 +60,43 @@ class LoginScreen: Fragment() {
         viewModel.loginEvent.collect { event: LoginEvent ->
             when(event) {
                 is LoginEvent.LoginSuccessFull -> {
+                    progressView!!.isVisible = false
+                    toggleFormFields()
                     Snackbar.make(requireContext(), binding.root,
                         "Login Successful User Id: ${event.userId}",
                         Snackbar.LENGTH_SHORT).show()
                 }
 
                 is LoginEvent.ErrorLogin -> {
+                    progressView!!.isVisible = false
+                    toggleFormFields()
                     Snackbar.make(requireContext(), binding.root,
                         event.message,
                         Snackbar.LENGTH_LONG).show()
                 }
+
+                is LoginEvent.ProcessingAuthentication -> {
+                    if (progressView != null) {
+                        progressView!!.isVisible = true
+                    }else {
+                        progressView = binding.progressStub.inflate()
+                    }
+                    toggleFormFields()
+                }
             }.exhaustive
+        }
+    }
+
+    private fun toggleFormFields() {
+        /*
+            Enables or disables form fields when progress
+            view is shown or removed on screen.
+         */
+        binding.apply {
+            etEmail.isEnabled = !progressView!!.isVisible
+            etPassword.isEnabled = !progressView!!.isVisible
+            loginBtn.isEnabled = !progressView!!.isVisible
+            signUp.isEnabled = !progressView!!.isVisible
         }
     }
 
