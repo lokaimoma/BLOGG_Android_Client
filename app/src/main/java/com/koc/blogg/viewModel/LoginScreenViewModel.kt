@@ -1,5 +1,6 @@
 package com.koc.blogg.viewModel
 
+import android.util.Patterns
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.koc.blogg.repository.BloggRepository
@@ -30,19 +31,34 @@ class LoginScreenViewModel @Inject constructor(
     val loginEvent = loginEventChannel.receiveAsFlow()
 
     fun loginUser() = viewModelScope.launch(IO) {
-        loginEventChannel.send(LoginEvent.ProcessingAuthentication)
-        when (val result = repository.loginUser(email=email, password=password)) {
-            is ResponseState.Success -> {
-                preferenceManager.apply {
-                    updateUserId(result.data!!.id)
-                    updateUserEmail(result.data.email)
-                    updateUserName(result.data.username)
+        if (validateFields()) {
+            loginEventChannel.send(LoginEvent.ProcessingAuthentication)
+            when (val result = repository.loginUser(email=email, password=password)) {
+                is ResponseState.Success -> {
+                    preferenceManager.apply {
+                        updateUserId(result.data!!.id)
+                        updateUserEmail(result.data.email)
+                        updateUserName(result.data.username)
+                    }
+                    loginEventChannel.send(LoginEvent.LoginSuccessFull(userId = result.data!!.id))
                 }
-                loginEventChannel.send(LoginEvent.LoginSuccessFull(userId = result.data!!.id))
-            }
-            is ResponseState.Error -> {
-                loginEventChannel.send(LoginEvent.ErrorLogin(result.message!!))
-            }
-        }.exhaustive
+                is ResponseState.Error -> {
+                    loginEventChannel.send(LoginEvent.ErrorLogin(result.message!!))
+                }
+            }.exhaustive
+        }
+    }
+
+    private suspend fun validateFields() : Boolean {
+        val emailIsValid = email.isNotEmpty() && Patterns.EMAIL_ADDRESS.matcher(email).matches()
+        val passwordIsValid = password.isNotEmpty()
+
+        if (!emailIsValid)
+            loginEventChannel.send(LoginEvent.InvalidEmail)
+
+        if (!passwordIsValid)
+            loginEventChannel.send(LoginEvent.InvalidPassword)
+
+        return emailIsValid && passwordIsValid
     }
 }
