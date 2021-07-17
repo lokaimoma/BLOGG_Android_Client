@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/base_graph"
+    app:startDestination="@id/loginScreen">
+
+    <fragment
+        android:id="@+id/loginScreen"
+        android:name="com.koc.blogg.view.loginScreen.LoginScreen"
+        android:label="Login" >
+        <action
+            android:id="@+id/loginScreen_to_signUpScreen"
+            app:destination="@id/signUpScreen"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/signUpScreen"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/signUpScreen"
+        android:name="com.koc.blogg.view.signUpScreen.signUpScreen"
+        android:label="signUpScreen" >
+        <action
+            android:id="@+id/signUpScreen_to_loginScreen"
+            app:destination="@id/loginScreen"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/loginScreen"
+            app:popUpToInclusive="true" />
+    </fragment>
+</navigation>

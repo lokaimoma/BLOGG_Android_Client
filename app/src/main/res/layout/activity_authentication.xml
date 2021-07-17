@@ -26,6 +26,6 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar"
-        app:navGraph="@navigation/base_graph" />
+        app:navGraph="@navigation/authenticatio_graph" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
