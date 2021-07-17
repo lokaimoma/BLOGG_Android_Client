@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.koc.blogg.databinding.SplashScreenBinding
 import com.koc.blogg.util.PreferenceManager
-import com.koc.blogg.view.AuthenticationActivity
+import com.koc.blogg.view.authenticationActivity.AuthenticationActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.flow.first
