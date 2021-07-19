@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.snackbar.Snackbar
 import com.koc.blogg.R
 import com.koc.blogg.databinding.SignupScreenBinding
 import com.koc.blogg.util.SignUpEvent
@@ -74,6 +75,18 @@ class SignUpScreen: Fragment() {
 
                 is SignUpEvent.UserNameInvalid -> {
                     binding.etUsername.error = getString(R.string.username_length_error)
+                }
+
+                is SignUpEvent.SignUpSuccessFul -> {
+                    Snackbar.make(requireContext(), binding.root,
+                        "Sign up successful user id : ${event.id}",
+                        Snackbar.LENGTH_LONG).show()
+                }
+
+                is SignUpEvent.SignUpFailed -> {
+                    Snackbar.make(requireContext(), binding.root,
+                        event.message,
+                        Snackbar.LENGTH_LONG).show()
                 }
             }.exhaustive
         }

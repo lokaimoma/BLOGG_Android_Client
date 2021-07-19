@@ -8,4 +8,6 @@ sealed class SignUpEvent{
     object PasswordInvalid: SignUpEvent()
     object PasswordNotMatching: SignUpEvent()
     object UserNameInvalid: SignUpEvent()
+    class SignUpSuccessFul(val id : Int): SignUpEvent()
+    class SignUpFailed(val message: String): SignUpEvent()
 }
