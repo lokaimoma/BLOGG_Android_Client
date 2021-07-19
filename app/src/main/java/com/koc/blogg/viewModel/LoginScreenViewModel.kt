@@ -9,6 +9,7 @@ import com.koc.blogg.util.LoginEvent
 import com.koc.blogg.util.PreferenceManager
 import com.koc.blogg.util.ResponseState
 import com.koc.blogg.util.exhaustive
+import com.koc.blogg.viewModel.extensions.saveCredentials
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.channels.Channel
@@ -36,7 +37,7 @@ class LoginScreenViewModel @Inject constructor(
             loginEventChannel.send(LoginEvent.ProcessingAuthentication)
             when (val result = repository.loginUser(email=email.trim(), password=password)) {
                 is ResponseState.Success -> {
-                    saveCredentials(result.data!!)
+                    saveCredentials(result.data!!, preferenceManager)
                     loginEventChannel.send(LoginEvent.LoginSuccessFull(userId = result.data.id))
                 }
                 is ResponseState.Error -> {
@@ -57,13 +58,5 @@ class LoginScreenViewModel @Inject constructor(
             loginEventChannel.send(LoginEvent.InvalidPassword)
 
         return emailIsValid && passwordIsValid
-    }
-
-    private suspend fun saveCredentials(data: UserLogin) {
-        preferenceManager.apply {
-            updateUserId(data.id)
-            updateUserEmail(data.email)
-            updateUserName(data.username)
-        }
     }
 }

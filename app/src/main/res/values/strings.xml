@@ -12,4 +12,13 @@
     <string name="to_login">to login</string>
     <string name="sign_up">Sign up</string>
     <string name="username">Username</string>
+    <string name="server_error">Server Error</string>
+    <string name="email_password_error">Email may not be registered or password is incorrect</string>
+    <string name="network_error">Error performing network call</string>
+    <string name="email_username_exits">Username or email already exists</string>
+    <string name="password_empty">Password can\'t be empty</string>
+    <string name="email_invalid">Enter valid email</string>
+    <string name="password_length_error">Password must be at least 8 characters long</string>
+    <string name="password_match_error">Passwords do not match</string>
+    <string name="username_length_error">Username must be at least 5 characters long</string>
 </resources>

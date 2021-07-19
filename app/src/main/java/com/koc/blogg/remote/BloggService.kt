@@ -12,7 +12,7 @@ interface BloggService {
     suspend fun registerUser(
         @Body body: UserPost,
         @Header("Content-Type") contentType: String = "application/json"
-    ): UserGet
+    ): UserLogin
 
 
     @POST("user/login")

@@ -90,11 +90,11 @@ class LoginScreen: Fragment() {
                 }
 
                 is LoginEvent.InvalidPassword -> {
-                    binding.etPassword.error = "Password can't be empty"
+                    binding.etPassword.error = getString(R.string.password_empty)
                 }
 
                 is LoginEvent.InvalidEmail -> {
-                    binding.etEmail.error = "Enter valid email"
+                    binding.etEmail.error = getString(R.string.email_invalid)
                 }
             }.exhaustive
         }

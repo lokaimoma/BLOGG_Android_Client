@@ -7,11 +7,16 @@ import android.view.ViewGroup
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.snackbar.Snackbar
 import com.koc.blogg.R
 import com.koc.blogg.databinding.SignupScreenBinding
+import com.koc.blogg.util.SignUpEvent
+import com.koc.blogg.util.exhaustive
 import com.koc.blogg.viewModel.SignUpScreenViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
 import javax.inject.Inject
 
 /**
@@ -45,8 +50,46 @@ class SignUpScreen: Fragment() {
             login.setOnClickListener {
                 findNavController().navigate(R.id.signUpScreen_to_loginScreen)
             }
+            signUpBtn.setOnClickListener {
+                viewModel.registerUser()
+            }
         }
         saveFormState()
+        monitorSignUpEvents()
+    }
+
+    private fun monitorSignUpEvents() = lifecycleScope.launchWhenCreated {
+        viewModel.signUpEvent.collect {event ->
+            when(event) {
+                is SignUpEvent.EmailInvalid -> {
+                    binding.etEmail.error = getString(R.string.email_invalid)
+                }
+
+                is SignUpEvent.PasswordInvalid -> {
+                    binding.etPassword.error = getString(R.string.password_length_error)
+                }
+
+                is SignUpEvent.PasswordNotMatching -> {
+                    binding.etPassword.error = getString(R.string.password_match_error)
+                }
+
+                is SignUpEvent.UserNameInvalid -> {
+                    binding.etUsername.error = getString(R.string.username_length_error)
+                }
+
+                is SignUpEvent.SignUpSuccessFul -> {
+                    Snackbar.make(requireContext(), binding.root,
+                        "Sign up successful user id : ${event.id}",
+                        Snackbar.LENGTH_LONG).show()
+                }
+
+                is SignUpEvent.SignUpFailed -> {
+                    Snackbar.make(requireContext(), binding.root,
+                        event.message,
+                        Snackbar.LENGTH_LONG).show()
+                }
+            }.exhaustive
+        }
     }
 
     private fun saveFormState() {
