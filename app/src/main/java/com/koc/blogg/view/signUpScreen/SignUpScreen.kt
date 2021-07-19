@@ -61,19 +61,19 @@ class SignUpScreen: Fragment() {
         viewModel.signUpEvent.collect {event ->
             when(event) {
                 is SignUpEvent.EmailInvalid -> {
-                    binding.etEmail.error = "Enter a valid email"
+                    binding.etEmail.error = getString(R.string.email_invalid)
                 }
 
                 is SignUpEvent.PasswordInvalid -> {
-                    binding.etPassword.error = "Password must be at least 8 characters long"
+                    binding.etPassword.error = getString(R.string.password_length_error)
                 }
 
                 is SignUpEvent.PasswordNotMatching -> {
-                    binding.etPassword.error = "Passwords do not match"
+                    binding.etPassword.error = getString(R.string.password_match_error)
                 }
 
                 is SignUpEvent.UserNameInvalid -> {
-                    binding.etUsername.error = "Username must be at least 5 characters long"
+                    binding.etUsername.error = getString(R.string.username_length_error)
                 }
             }.exhaustive
         }

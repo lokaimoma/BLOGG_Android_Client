@@ -8,7 +8,6 @@ import com.koc.blogg.remote.BloggService
 import com.koc.blogg.util.ResponseState
 import com.koc.blogg.util.exhaustive
 import dagger.hilt.android.qualifiers.ActivityContext
-import dagger.hilt.android.qualifiers.ApplicationContext
 import retrofit2.HttpException
 import javax.inject.Inject
 
