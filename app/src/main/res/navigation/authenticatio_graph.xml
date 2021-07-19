@@ -11,6 +11,8 @@
         <action
             android:id="@+id/loginScreen_to_signUpScreen"
             app:destination="@id/signUpScreen"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
             app:launchSingleTop="true"
             app:popUpTo="@id/signUpScreen"
             app:popUpToInclusive="true" />
@@ -22,11 +24,9 @@
         <action
             android:id="@+id/signUpScreen_to_loginScreen"
             app:destination="@id/loginScreen"
-            app:enterAnim="@android:anim/slide_out_right"
-            app:exitAnim="@android:anim/slide_in_left"
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right"
             app:launchSingleTop="true"
-            app:popEnterAnim="@android:anim/slide_in_left"
-            app:popExitAnim="@android:anim/slide_out_right"
             app:popUpTo="@id/loginScreen"
             app:popUpToInclusive="true" />
     </fragment>
