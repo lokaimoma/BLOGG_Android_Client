@@ -45,6 +45,9 @@ class SignUpScreen: Fragment() {
             login.setOnClickListener {
                 findNavController().navigate(R.id.signUpScreen_to_loginScreen)
             }
+            signUpBtn.setOnClickListener {
+                viewModel.registerUser()
+            }
         }
         saveFormState()
     }
