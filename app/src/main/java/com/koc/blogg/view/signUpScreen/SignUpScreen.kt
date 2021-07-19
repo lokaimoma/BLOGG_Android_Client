@@ -7,11 +7,15 @@ import android.view.ViewGroup
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.koc.blogg.R
 import com.koc.blogg.databinding.SignupScreenBinding
+import com.koc.blogg.util.SignUpEvent
+import com.koc.blogg.util.exhaustive
 import com.koc.blogg.viewModel.SignUpScreenViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
 import javax.inject.Inject
 
 /**
@@ -50,6 +54,29 @@ class SignUpScreen: Fragment() {
             }
         }
         saveFormState()
+        monitorSignUpEvents()
+    }
+
+    private fun monitorSignUpEvents() = lifecycleScope.launchWhenCreated {
+        viewModel.signUpEvent.collect {event ->
+            when(event) {
+                is SignUpEvent.EmailInvalid -> {
+                    binding.etEmail.error = "Enter a valid email"
+                }
+
+                is SignUpEvent.PasswordInvalid -> {
+                    binding.etPassword.error = "Password must be at least 8 characters long"
+                }
+
+                is SignUpEvent.PasswordNotMatching -> {
+                    binding.etPassword.error = "Passwords do not match"
+                }
+
+                is SignUpEvent.UserNameInvalid -> {
+                    binding.etUsername.error = "Username must be at least 5 characters long"
+                }
+            }.exhaustive
+        }
     }
 
     private fun saveFormState() {
