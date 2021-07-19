@@ -10,4 +10,5 @@ sealed class SignUpEvent{
     object UserNameInvalid: SignUpEvent()
     class SignUpSuccessFul(val id : Int): SignUpEvent()
     class SignUpFailed(val message: String): SignUpEvent()
+    object ProcessingSignUp: SignUpEvent()
 }
