@@ -7,7 +7,7 @@ import com.koc.blogg.model.remote.UserPost
 import com.koc.blogg.remote.BloggService
 import com.koc.blogg.util.ResponseState
 import com.koc.blogg.util.exhaustive
-import dagger.hilt.android.qualifiers.ActivityContext
+import dagger.hilt.android.qualifiers.ApplicationContext
 import retrofit2.HttpException
 import javax.inject.Inject
 
@@ -16,7 +16,7 @@ Created by kelvin_clark on 7/15/2021 2:15 AM
  */
 class BloggRepository @Inject constructor(
     private val api: BloggService,
-    @ActivityContext private val context: Context
+    @ApplicationContext private val context: Context
 ) {
 
     suspend fun loginUser(email: String, password: String): ResponseState<UserLogin> {
