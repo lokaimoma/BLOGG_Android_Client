@@ -34,7 +34,7 @@ class LoginScreenViewModel @Inject constructor(
     fun loginUser() = viewModelScope.launch(IO) {
         if (validateFields()) {
             loginEventChannel.send(LoginEvent.ProcessingAuthentication)
-            when (val result = repository.loginUser(email=email, password=password)) {
+            when (val result = repository.loginUser(email=email.trim(), password=password)) {
                 is ResponseState.Success -> {
                     saveCredentials(result.data!!)
                     loginEventChannel.send(LoginEvent.LoginSuccessFull(userId = result.data.id))
