@@ -3,7 +3,6 @@ package com.koc.blogg.viewModel
 import android.util.Patterns
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.koc.blogg.model.remote.UserLogin
 import com.koc.blogg.repository.BloggRepository
 import com.koc.blogg.util.LoginEvent
 import com.koc.blogg.util.PreferenceManager

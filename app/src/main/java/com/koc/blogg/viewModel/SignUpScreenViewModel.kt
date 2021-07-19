@@ -33,6 +33,7 @@ class SignUpScreenViewModel @Inject constructor(
 
     fun registerUser() = viewModelScope.launch(IO) {
         if (validateFields()) {
+            signUpChannel.send(SignUpEvent.ProcessingSignUp)
             when (val result =
                 repository.registerUser(email = email, password = password, userName = username)){
                 is ResponseState.Success -> {

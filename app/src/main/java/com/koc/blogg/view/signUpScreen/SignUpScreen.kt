@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -17,7 +18,6 @@ import com.koc.blogg.util.exhaustive
 import com.koc.blogg.viewModel.SignUpScreenViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
-import javax.inject.Inject
 
 /**
 Created by kelvin_clark on 7/17/2021 7:59 PM
@@ -29,6 +29,7 @@ class SignUpScreen: Fragment() {
         get() = _binding!!
 
     val viewModel: SignUpScreenViewModel by viewModels()
+    private var progressView: View? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -78,17 +79,41 @@ class SignUpScreen: Fragment() {
                 }
 
                 is SignUpEvent.SignUpSuccessFul -> {
+                    progressView!!.isVisible = false
+                    toggleFormFields()
                     Snackbar.make(requireContext(), binding.root,
                         "Sign up successful user id : ${event.id}",
                         Snackbar.LENGTH_LONG).show()
                 }
 
                 is SignUpEvent.SignUpFailed -> {
+                    progressView!!.isVisible = false
+                    toggleFormFields()
                     Snackbar.make(requireContext(), binding.root,
                         event.message,
                         Snackbar.LENGTH_LONG).show()
                 }
+
+                is SignUpEvent.ProcessingSignUp -> {
+                    if (progressView == null) {
+                        progressView = binding.progressStub.inflate()
+                    }else {
+                        progressView?.isVisible = true
+                    }
+                    toggleFormFields()
+                }
             }.exhaustive
+        }
+    }
+
+    private fun toggleFormFields() {
+        binding.apply {
+            etEmail.isEnabled = !progressView!!.isVisible
+            etPassword.isEnabled = !progressView!!.isVisible
+            etConfirmPassword.isEnabled = !progressView!!.isVisible
+            etUsername.isEnabled = !progressView!!.isVisible
+            login.isEnabled = !progressView!!.isVisible
+            signUpBtn.isEnabled = !progressView!!.isVisible
         }
     }
 
