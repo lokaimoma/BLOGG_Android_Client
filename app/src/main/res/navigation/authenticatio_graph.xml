@@ -19,7 +19,7 @@
     </fragment>
     <fragment
         android:id="@+id/signUpScreen"
-        android:name="com.koc.blogg.view.signUpScreen.signUpScreen"
+        android:name="com.koc.blogg.view.signUpScreen.SignUpScreen"
         android:label="signUpScreen" >
         <action
             android:id="@+id/signUpScreen_to_loginScreen"
