@@ -29,6 +29,10 @@
         <activity android:name=".view.authenticationActivity.AuthenticationActivity"
             android:theme="@style/BloggNoActionBar">
         </activity>
+
+        <activity android:name=".view.blogActivity.BlogActivity"
+            android:theme="@style/BloggNoActionBar">
+        </activity>
     </application>
 
 </manifest>
