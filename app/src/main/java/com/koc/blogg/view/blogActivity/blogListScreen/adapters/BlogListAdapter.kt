@@ -30,6 +30,10 @@ class BlogListAdapter(private val blogItemClickedListener: BlogItemClickedListen
         holder.populateViews(getItem(position))
     }
 
+    fun clearBinding() {
+        _binding = null
+    }
+
     inner class BlogListViewHolder :
         RecyclerView.ViewHolder(binding.root) {
         init {
