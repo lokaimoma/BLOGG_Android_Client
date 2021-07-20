@@ -2,6 +2,7 @@ package com.koc.blogg.repository
 
 import android.content.Context
 import com.koc.blogg.R
+import com.koc.blogg.model.remote.Blog
 import com.koc.blogg.model.remote.UserLogin
 import com.koc.blogg.model.remote.UserPost
 import com.koc.blogg.remote.BloggService
@@ -49,20 +50,29 @@ class BloggRepository @Inject constructor(
             val userPost = UserPost(email = email, password = password, username = userName)
             val result = api.registerUser(body = userPost)
             ResponseState.Success(data = result)
-        }catch (throwable: Throwable) {
-            when(throwable) {
+        } catch (throwable: Throwable) {
+            when (throwable) {
                 is HttpException -> {
                     val code = throwable.code()
                     var message = ""
                     if (code == 409) {
                         message = context.getString(R.string.email_username_exits)
-                    }else if (code == 500) {
+                    } else if (code == 500) {
                         message = context.getString(R.string.server_error)
                     }
                     ResponseState.Error(message = message)
                 }
                 else -> ResponseState.Error(message = context.getString(R.string.network_error))
             }
+        }
+    }
+
+    suspend fun fetchAllBlogs(): ResponseState<List<Blog>> {
+        return try {
+            val result = api.getAllBlogs()
+            ResponseState.Success(result)
+        } catch (throwable: Throwable) {
+            ResponseState.Error(message = context.getString(R.string.server_error))
         }
     }
 }
