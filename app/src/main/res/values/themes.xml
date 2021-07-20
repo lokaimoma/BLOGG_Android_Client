@@ -24,6 +24,11 @@
         <!--   Apply layer list     -->
     </style>
 
+    <style name="BlogActivity" parent="BloggNoActionBar">
+        <item name="android:windowTranslucentStatus">false</item>
+        <item name="android:statusBarColor">@color/primary</item>
+    </style>
+
     <style name="BlogTitle" parent="TextAppearance.MaterialComponents.Headline5">
         <item name="android:textColor">@android:color/white</item>
     </style>
