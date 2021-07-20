@@ -13,8 +13,8 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.koc.blogg.R
 import com.koc.blogg.databinding.LoginScreenBinding
-import com.koc.blogg.util.LoginEvent
-import com.koc.blogg.util.exhaustive
+import com.koc.blogg.util.events.LoginEvent
+import com.koc.blogg.util.events.exhaustive
 import com.koc.blogg.viewModel.LoginScreenViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
@@ -61,7 +61,7 @@ class LoginScreen: Fragment() {
     }
 
     private fun monitorEvents() = viewLifecycleOwner.lifecycleScope.launchWhenCreated {
-        viewModel.loginEvent.collect { event: LoginEvent ->
+        viewModel.loginEvent.collect{ event: LoginEvent ->
             when(event) {
                 is LoginEvent.LoginSuccessFull -> {
                     progressView!!.isVisible = false

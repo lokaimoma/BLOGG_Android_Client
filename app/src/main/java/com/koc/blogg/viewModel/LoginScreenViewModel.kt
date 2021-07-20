@@ -4,10 +4,10 @@ import android.util.Patterns
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.koc.blogg.repository.BloggRepository
-import com.koc.blogg.util.LoginEvent
 import com.koc.blogg.util.PreferenceManager
 import com.koc.blogg.util.ResponseState
-import com.koc.blogg.util.exhaustive
+import com.koc.blogg.util.events.LoginEvent
+import com.koc.blogg.util.events.exhaustive
 import com.koc.blogg.viewModel.extensions.saveCredentials
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers.IO

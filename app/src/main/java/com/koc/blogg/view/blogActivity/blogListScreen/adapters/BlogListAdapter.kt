@@ -9,6 +9,8 @@ import com.koc.blogg.databinding.BlogListItemBinding
 import com.koc.blogg.model.remote.Blog
 import com.koc.blogg.util.BlogItemClickedListener
 import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.LocalDateTime
 import java.util.*
 
 /**
@@ -52,9 +54,9 @@ class BlogListAdapter(private val blogItemClickedListener: BlogItemClickedListen
             binding.apply {
                 blogTitle.text = blog.title
                 blogBody.text = blog.body
-                val dateFormat = SimpleDateFormat("MMMM, dd", Locale.getDefault())
+                val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
                 val date = dateFormat.parse(blog.createdDate)
-                blogDate.text = date?.toString()
+                blogDate.text = SimpleDateFormat("MMMM, dd", Locale.getDefault()).format(date!!)
             }
         }
     }
