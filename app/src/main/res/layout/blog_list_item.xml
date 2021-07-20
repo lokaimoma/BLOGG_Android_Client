@@ -8,7 +8,7 @@
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="0dp"
-        android:layout_height="200dp"
+        android:layout_height="wrap_content"
         app:cardCornerRadius="@dimen/card_corner"
         app:cardElevation="7dp"
         app:cardPreventCornerOverlap="true"
@@ -29,8 +29,9 @@
                 style="@style/BlogTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="18dp"
-                android:layout_marginTop="18dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.061"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="Blog Title" />
@@ -44,7 +45,7 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="18dp"
                 android:ellipsize="end"
-                android:maxLines="5"
+                android:maxLines="3"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/blogTitle"
@@ -52,13 +53,15 @@
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/blogDate"
+                style="@style/BLogDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/blogBody"
                 app:layout_constraintTop_toBottomOf="@+id/blogBody"
-                tools:text="July 2, 2020"
-                style="@style/BLogDate"/>
+                tools:text="July 2, 2020" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </com.google.android.material.card.MaterialCardView>
