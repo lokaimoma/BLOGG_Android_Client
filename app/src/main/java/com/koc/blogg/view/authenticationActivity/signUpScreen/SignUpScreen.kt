@@ -1,4 +1,4 @@
-package com.koc.blogg.view.signUpScreen
+package com.koc.blogg.view.authenticationActivity.signUpScreen
 
 import android.os.Bundle
 import android.view.LayoutInflater

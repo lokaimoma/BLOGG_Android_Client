@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/loginScreen"
-        android:name="com.koc.blogg.view.loginScreen.LoginScreen"
+        android:name="com.koc.blogg.view.authenticationActivity.loginScreen.LoginScreen"
         android:label="Login" >
         <action
             android:id="@+id/loginScreen_to_signUpScreen"
@@ -19,7 +19,7 @@
     </fragment>
     <fragment
         android:id="@+id/signUpScreen"
-        android:name="com.koc.blogg.view.signUpScreen.SignUpScreen"
+        android:name="com.koc.blogg.view.authenticationActivity.signUpScreen.SignUpScreen"
         android:label="signUpScreen" >
         <action
             android:id="@+id/signUpScreen_to_loginScreen"
