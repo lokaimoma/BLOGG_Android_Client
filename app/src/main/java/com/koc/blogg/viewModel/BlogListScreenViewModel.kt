@@ -37,7 +37,11 @@ class BlogListScreenViewModel @Inject constructor(
     private fun fetchBlogs() = viewModelScope.launch(IO) {
         when(val result = repository.fetchAllBlogs()){
             is ResponseState.Success -> {
-                _blogList.value = result.data!!
+                if (_blogList.value.size != result.data!!.size) {
+                    _blogList.value = result.data
+                }else {
+                    return@launch
+                }
             }
             is ResponseState.Error -> {
                 listEventChannel.send(BlogListEvent.FetchError)
