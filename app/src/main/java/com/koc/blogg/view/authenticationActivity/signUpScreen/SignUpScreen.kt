@@ -13,7 +13,7 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.koc.blogg.R
 import com.koc.blogg.databinding.SignupScreenBinding
-import com.koc.blogg.util.SignUpEvent
+import com.koc.blogg.util.events.SignUpEvent
 import com.koc.blogg.util.exhaustive
 import com.koc.blogg.viewModel.SignUpScreenViewModel
 import dagger.hilt.android.AndroidEntryPoint

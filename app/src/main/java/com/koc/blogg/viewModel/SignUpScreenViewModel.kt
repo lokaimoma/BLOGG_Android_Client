@@ -6,7 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.koc.blogg.repository.BloggRepository
 import com.koc.blogg.util.PreferenceManager
 import com.koc.blogg.util.ResponseState
-import com.koc.blogg.util.SignUpEvent
+import com.koc.blogg.util.events.SignUpEvent
 import com.koc.blogg.viewModel.extensions.saveCredentials
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers.IO

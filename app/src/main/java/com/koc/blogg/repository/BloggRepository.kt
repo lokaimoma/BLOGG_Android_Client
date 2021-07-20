@@ -9,6 +9,7 @@ import com.koc.blogg.remote.BloggService
 import com.koc.blogg.util.ResponseState
 import com.koc.blogg.util.exhaustive
 import dagger.hilt.android.qualifiers.ApplicationContext
+import kotlinx.coroutines.flow.Flow
 import retrofit2.HttpException
 import javax.inject.Inject
 
@@ -67,7 +68,7 @@ class BloggRepository @Inject constructor(
         }
     }
 
-    suspend fun fetchAllBlogs(): ResponseState<List<Blog>> {
+    suspend fun fetchAllBlogs(): ResponseState<Flow<List<Blog>>> {
         return try {
             val result = api.getAllBlogs()
             ResponseState.Success(result)
