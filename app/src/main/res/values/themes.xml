@@ -23,4 +23,16 @@
     <style name="BloggNoActionBar.SplashScreen" parent="BloggNoActionBar">
         <!--   Apply layer list     -->
     </style>
+
+    <style name="BlogTitle" parent="TextAppearance.MaterialComponents.Headline5">
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <style name="BlogBody" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <style name="BLogDate" parent="TextAppearance.MaterialComponents.Overline">
+        <item name="android:textColor">@android:color/white</item>
+    </style>
 </resources>
