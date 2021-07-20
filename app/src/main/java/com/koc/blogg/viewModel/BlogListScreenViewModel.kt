@@ -39,6 +39,7 @@ class BlogListScreenViewModel @Inject constructor(
             is ResponseState.Success -> {
                 if (_blogList.value.size != result.data!!.size) {
                     _blogList.value = result.data
+                    listEventChannel.send(BlogListEvent.FetchSuccessFull(result.data.size))
                 }else {
                     return@launch
                 }

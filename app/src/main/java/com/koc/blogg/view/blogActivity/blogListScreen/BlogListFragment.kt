@@ -4,12 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.material.snackbar.Snackbar
-import com.koc.blogg.R
+import androidx.recyclerview.widget.RecyclerView
 import com.koc.blogg.databinding.BlogListScreenBinding
 import com.koc.blogg.util.BlogItemClickedListener
 import com.koc.blogg.util.events.BlogListEvent
@@ -43,12 +43,6 @@ class BlogListFragment: Fragment(), BlogItemClickedListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.apply {
-            rvBlogs.apply {
-                adapter = listAdapter
-                layoutManager = LinearLayoutManager(requireContext())
-            }
-        }
         observeBlogList()
         monitorListEvents()
     }
@@ -57,8 +51,19 @@ class BlogListFragment: Fragment(), BlogItemClickedListener {
         viewModel.listEvent.collect { event ->
             when(event) {
                 is BlogListEvent.FetchError -> {
-                    Snackbar.make(requireContext(), binding.root,
-                        getString(R.string.error_fetching_blogs), Snackbar.LENGTH_SHORT).show()
+                    binding.loadingScreen.isVisible = false
+                    val view = binding.noInternetStub.inflate()
+                }
+
+                is BlogListEvent.FetchSuccessFull -> {
+                    binding.loadingScreen.isVisible = false
+                    if (event.blog_count >= 1) {
+                        val rvBlogs = binding.rvBlogsStub.inflate() as RecyclerView
+                        rvBlogs.layoutManager = LinearLayoutManager(requireContext())
+                        rvBlogs.adapter = listAdapter
+                    }else {
+                        val view = binding.blogEmptyStub.inflate()
+                    }
                 }
             }.exhaustive
         }
