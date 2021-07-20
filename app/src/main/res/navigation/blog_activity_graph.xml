@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/blog_activity_graph"
+    app:startDestination="@id/blogListFragment">
+
+    <fragment
+        android:id="@+id/blogListFragment"
+        android:name="com.koc.blogg.view.blogActivity.blogListScreen.BlogListFragment"
+        android:label="BlogListFragment" />
+</navigation>
