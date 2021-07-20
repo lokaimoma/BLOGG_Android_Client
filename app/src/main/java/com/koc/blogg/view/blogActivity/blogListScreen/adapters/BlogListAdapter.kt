@@ -5,12 +5,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.koc.blogg.databinding.BlogActivityBinding
 import com.koc.blogg.databinding.BlogListItemBinding
 import com.koc.blogg.model.remote.Blog
 import com.koc.blogg.util.BlogItemClickedListener
-import java.lang.String.format
-import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -51,7 +48,7 @@ class BlogListAdapter(private val blogItemClickedListener: BlogItemClickedListen
             binding.apply {
                 blogTitle.text = blog.title
                 blogBody.text = blog.body
-                val dateFormat = SimpleDateFormat("mm, dd", Locale.getDefault())
+                val dateFormat = SimpleDateFormat("MMMM, dd", Locale.getDefault())
                 val date = dateFormat.parse(blog.createdDate)
                 blogDate.text = date?.toString()
             }
