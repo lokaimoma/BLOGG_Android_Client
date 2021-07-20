@@ -52,9 +52,9 @@ class BlogListAdapter(private val blogItemClickedListener: BlogItemClickedListen
             binding.apply {
                 blogTitle.text = blog.title
                 blogBody.text = blog.body
-                val dateFormat = SimpleDateFormat("MMMM, dd", Locale.getDefault())
+                val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
                 val date = dateFormat.parse(blog.createdDate)
-                blogDate.text = date?.toString()
+                blogDate.text = SimpleDateFormat("MMMM, dd", Locale.getDefault()).format(date!!)
             }
         }
     }
@@ -65,6 +65,5 @@ class BlogListAdapter(private val blogItemClickedListener: BlogItemClickedListen
 
         override fun areContentsTheSame(oldItem: Blog, newItem: Blog): Boolean =
             oldItem == newItem
-
     }
 }

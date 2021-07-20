@@ -1,7 +1,6 @@
 package com.koc.blogg.remote
 
 import com.koc.blogg.model.remote.*
-import kotlinx.coroutines.flow.Flow
 import retrofit2.http.*
 
 /**
@@ -37,7 +36,7 @@ interface BloggService {
     ): Blog
 
     @GET("blog/")
-    suspend fun getAllBlogs(): Flow<List<Blog>>
+    suspend fun getAllBlogs(): List<Blog>
 
     @GET("blog/user_blogs/{user_id}")
     suspend fun getAllUserBlogs(

@@ -7,7 +7,7 @@ import com.koc.blogg.model.remote.UserLogin
 import com.koc.blogg.model.remote.UserPost
 import com.koc.blogg.remote.BloggService
 import com.koc.blogg.util.ResponseState
-import com.koc.blogg.util.exhaustive
+import com.koc.blogg.util.events.exhaustive
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.Flow
 import retrofit2.HttpException
@@ -68,11 +68,12 @@ class BloggRepository @Inject constructor(
         }
     }
 
-    suspend fun fetchAllBlogs(): ResponseState<Flow<List<Blog>>> {
+    suspend fun fetchAllBlogs(): ResponseState<List<Blog>> {
         return try {
             val result = api.getAllBlogs()
             ResponseState.Success(result)
         } catch (throwable: Throwable) {
+            throwable.printStackTrace()
             ResponseState.Error(message = context.getString(R.string.server_error))
         }
     }

@@ -11,8 +11,7 @@ import com.koc.blogg.util.events.exhaustive
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -32,13 +31,13 @@ class BlogListScreenViewModel @Inject constructor(
     private val listEventChannel = Channel<BlogListEvent>()
     val listEvent = listEventChannel.receiveAsFlow()
 
-    private var _blogList: Flow<List<Blog>> = flowOf(listOf())
+    private var _blogList: MutableStateFlow<List<Blog>> = MutableStateFlow(listOf())
     val blogList = _blogList.asLiveData()
 
     private fun fetchBlogs() = viewModelScope.launch(IO) {
         when(val result = repository.fetchAllBlogs()){
             is ResponseState.Success -> {
-                _blogList = result.data!!
+                _blogList.value = result.data!!
             }
             is ResponseState.Error -> {
                 listEventChannel.send(BlogListEvent.FetchError)

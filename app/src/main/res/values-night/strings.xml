@@ -19,4 +19,5 @@
     <string name="password_length_error">Password must be at least 8 characters long</string>
     <string name="password_match_error">Passwords do not match</string>
     <string name="username_length_error">Username must be at least 5 characters long</string>
+    <string name="error_fetching_blogs">Error Fetching Blogs</string>
 </resources>
