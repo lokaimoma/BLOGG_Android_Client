@@ -9,8 +9,6 @@ import com.koc.blogg.databinding.BlogListItemBinding
 import com.koc.blogg.model.remote.Blog
 import com.koc.blogg.util.BlogItemClickedListener
 import java.text.SimpleDateFormat
-import java.time.LocalDate
-import java.time.LocalDateTime
 import java.util.*
 
 /**
@@ -67,6 +65,5 @@ class BlogListAdapter(private val blogItemClickedListener: BlogItemClickedListen
 
         override fun areContentsTheSame(oldItem: Blog, newItem: Blog): Boolean =
             oldItem == newItem
-
     }
 }
