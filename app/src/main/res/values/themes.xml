@@ -28,7 +28,7 @@
         <item name="android:textColor">@android:color/white</item>
     </style>
 
-    <style name="BlogBody" parent="TextAppearance.MaterialComponents.Body1">
+    <style name="BlogBody" parent="TextAppearance.MaterialComponents.Body2">
         <item name="android:textColor">@android:color/white</item>
     </style>
 
