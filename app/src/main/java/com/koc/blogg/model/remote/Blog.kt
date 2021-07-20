@@ -8,6 +8,8 @@ data class Blog(
     val body: String,
     @SerializedName("created_date")
     val createdDate: String,
+    @SerializedName("id")
+    val id: Int,
     @SerializedName("last_updated")
     val lastUpdated: String,
     @SerializedName("title")
