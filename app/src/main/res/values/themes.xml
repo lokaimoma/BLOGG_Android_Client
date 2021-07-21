@@ -40,4 +40,13 @@
     <style name="BLogDate" parent="TextAppearance.MaterialComponents.Overline">
         <item name="android:textColor">@android:color/white</item>
     </style>
+
+    // Collapsing app bar
+    <style name="TextAppearance.App.CollapsingToolbar.Expanded" parent="TextAppearance.MaterialComponents.Headline5">
+        <item name="android:textColor">?attr/colorOnPrimary</item>
+    </style>
+
+    <style name="TextAppearance.App.CollapsingToolbar.Collapsed" parent="TextAppearance.MaterialComponents.Headline6">
+        <item name="android:textColor">?attr/colorOnPrimary</item>
+    </style>
 </resources>
