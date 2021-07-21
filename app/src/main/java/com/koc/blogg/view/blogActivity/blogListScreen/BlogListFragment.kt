@@ -26,6 +26,7 @@ Created by kelvin_clark on 7/20/2021 2:01 PM
 @AndroidEntryPoint
 class BlogListFragment: Fragment(), BlogItemClickedListener {
 
+    private var rvBlogs: RecyclerView? = null
     private val listAdapter = BlogListAdapter(this)
     private val viewModel: BlogListScreenViewModel by viewModels()
 
@@ -48,6 +49,11 @@ class BlogListFragment: Fragment(), BlogItemClickedListener {
         monitorListEvents()
     }
 
+    override fun onResume() {
+        super.onResume()
+        viewModel.fetchBlogs()
+    }
+
     private fun monitorListEvents() = lifecycleScope.launchWhenCreated {
         viewModel.listEvent.collect { event ->
             when(event) {
@@ -59,9 +65,9 @@ class BlogListFragment: Fragment(), BlogItemClickedListener {
                 is BlogListEvent.FetchSuccessFull -> {
                     binding.loadingScreen.isVisible = false
                     if (event.blog_count >= 1) {
-                        val rvBlogs = binding.rvBlogsStub.inflate() as RecyclerView
-                        rvBlogs.layoutManager = LinearLayoutManager(requireContext())
-                        rvBlogs.adapter = listAdapter
+                        rvBlogs = binding.rvBlogsStub.inflate() as RecyclerView
+                        rvBlogs?.layoutManager = LinearLayoutManager(requireContext())
+                        rvBlogs?.adapter = listAdapter
                     }else {
                         val view = binding.blogEmptyStub.inflate()
                     }
@@ -81,6 +87,7 @@ class BlogListFragment: Fragment(), BlogItemClickedListener {
     override fun onDestroy() {
         super.onDestroy()
         listAdapter.clearBinding()
+        binding.root.removeAllViews()
         _binding = null
     }
 
