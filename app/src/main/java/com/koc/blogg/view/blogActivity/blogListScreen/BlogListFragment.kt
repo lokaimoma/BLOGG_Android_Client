@@ -8,6 +8,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.koc.blogg.databinding.BlogListScreenBinding
@@ -84,6 +85,7 @@ class BlogListFragment: Fragment(), BlogItemClickedListener {
     }
 
     override fun onClicked(blogId: Int) {
-        // TODO: Send event to and id to view model for processing
+        val action = BlogListFragmentDirections.listToDetail(blogId = blogId)
+        findNavController().navigate(action)
     }
 }
