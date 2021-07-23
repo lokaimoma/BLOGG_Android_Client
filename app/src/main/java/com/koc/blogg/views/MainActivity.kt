@@ -29,7 +29,8 @@ class MainActivity : AppCompatActivity() {
         toolBar.setupWithNavController(navController, appBarConfiguration)
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
-            toolBar.isVisible = destination.id != R.id.splashScreenFragment
+            toolBar.isVisible = !(destination.id == R.id.splashScreenFragment || destination.id == R.id.signInFragment ||
+                    destination.id == R.id.signUpFragment)
         }
     }
 }
