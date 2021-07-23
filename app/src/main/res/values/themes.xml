@@ -20,15 +20,7 @@
         <item name="android:windowTranslucentStatus">true</item>
     </style>
 
-    <style name="BloggNoActionBar.SplashScreen" parent="BloggNoActionBar">
-        <!--   Apply layer list     -->
-    </style>
-
-    <style name="BlogActivity" parent="BloggNoActionBar">
-        <item name="android:windowTranslucentStatus">false</item>
-        <item name="android:statusBarColor">@color/primary</item>
-    </style>
-
+    // Text formatting
     <style name="BlogTitle" parent="TextAppearance.MaterialComponents.Headline5">
         <item name="android:textColor">@android:color/white</item>
     </style>
@@ -39,14 +31,5 @@
 
     <style name="BLogDate" parent="TextAppearance.MaterialComponents.Overline">
         <item name="android:textColor">@android:color/white</item>
-    </style>
-
-    // Collapsing app bar
-    <style name="TextAppearance.App.CollapsingToolbar.Expanded" parent="TextAppearance.MaterialComponents.Headline5">
-        <item name="android:textColor">?attr/colorOnPrimary</item>
-    </style>
-
-    <style name="TextAppearance.App.CollapsingToolbar.Collapsed" parent="TextAppearance.MaterialComponents.Headline6">
-        <item name="android:textColor">?attr/colorOnPrimary</item>
     </style>
 </resources>

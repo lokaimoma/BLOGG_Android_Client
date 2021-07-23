@@ -16,23 +16,6 @@
         android:theme="@style/Theme.BLOGG"
         tools:targetApi="n">
 
-        <activity android:name=".view.splashActivity.SplashScreen"
-            android:theme="@style/BloggNoActionBar.SplashScreen">
-
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-
-        <activity android:name=".view.authenticationActivity.AuthenticationActivity"
-            android:theme="@style/BloggNoActionBar">
-        </activity>
-
-        <activity android:name=".view.blogActivity.BlogActivity"
-            android:theme="@style/BlogActivity">
-        </activity>
     </application>
 
 </manifest>

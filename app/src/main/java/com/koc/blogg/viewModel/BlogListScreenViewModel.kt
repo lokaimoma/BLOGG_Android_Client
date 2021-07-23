@@ -22,7 +22,11 @@ Created by kelvin_clark on 7/20/2021 3:58 PM
 @HiltViewModel
 class BlogListScreenViewModel @Inject constructor(
     private val repository: BloggRepository
-): ViewModel() {
+) : ViewModel() {
+
+    init {
+        fetchBlogs()
+    }
 
     private val listEventChannel = Channel<BlogListEvent>()
     val listEvent = listEventChannel.receiveAsFlow()
@@ -30,20 +34,19 @@ class BlogListScreenViewModel @Inject constructor(
     private var _blogList: MutableStateFlow<List<Blog>> = MutableStateFlow(listOf())
     val blogList = _blogList.asLiveData()
 
-    fun fetchBlogs() = viewModelScope.launch(IO) {
-        when(val result = repository.fetchAllBlogs()){
+    private fun fetchBlogs() = viewModelScope.launch(IO) {
+        when (val result = repository.fetchAllBlogs()) {
             is ResponseState.Success -> {
-                if (_blogList.value.size != result.data!!.size) {
-                    _blogList.value = result.data
-                    listEventChannel.send(BlogListEvent.FetchSuccessFull(result.data.size))
-                }else {
-                    listEventChannel.send(BlogListEvent.FetchSuccessFull(result.data.size))
-                }
+                _blogList.value = result.data!!
             }
             is ResponseState.Error -> {
                 listEventChannel.send(BlogListEvent.FetchError)
             }
         }.exhaustive
+
+        if (_blogList.value.isEmpty()) {
+            listEventChannel.send(BlogListEvent.ListEmpty)
+        }
     }
 
 }
