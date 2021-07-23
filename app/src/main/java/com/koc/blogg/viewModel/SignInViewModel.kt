@@ -20,7 +20,7 @@ import javax.inject.Inject
 Created by kelvin_clark on 7/15/2021 1:28 AM
  */
 @HiltViewModel
-class LoginScreenViewModel @Inject constructor(
+class SignInViewModel @Inject constructor(
     private val repository: BloggRepository,
     private val preferenceManager: PreferenceManager
 ) : ViewModel() {
