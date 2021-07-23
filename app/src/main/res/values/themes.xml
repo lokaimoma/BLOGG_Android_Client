@@ -17,7 +17,7 @@
     <style name="BloggNoActionBar" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
-        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:statusBarColor">@color/primary</item>
     </style>
 
     // Text formatting

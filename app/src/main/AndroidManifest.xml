@@ -15,7 +15,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BLOGG"
         tools:targetApi="n">
-        <activity android:name=".views.MainActivity">
+        <activity android:name=".views.MainActivity"
+            android:theme="@style/BloggNoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

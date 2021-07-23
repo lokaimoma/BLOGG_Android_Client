@@ -1,6 +1,8 @@
 package com.koc.blogg.views.splashScreen
 
+import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import com.koc.blogg.databinding.FragmentSplashScreenBinding
 import com.koc.blogg.util.commons.BaseFragment
