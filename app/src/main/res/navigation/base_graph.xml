@@ -11,8 +11,8 @@
         android:label="fragment_splash_screen"
         tools:layout="@layout/fragment_splash_screen" >
         <action
-            android:id="@+id/action_splashScreenFragment_to_signInFragment"
-            app:destination="@id/signInFragment"
+            android:id="@+id/action_splashScreenFragment_to_authenticationChoiceFragment"
+            app:destination="@id/authenticationChoiceFragment"
             app:popUpTo="@id/splashScreenFragment"
             app:popUpToInclusive="true" />
     </fragment>
@@ -31,5 +31,21 @@
         <action
             android:id="@+id/action_signUpFragment_to_signInFragment"
             app:destination="@id/signInFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/authenticationChoiceFragment"
+        android:name="com.koc.blogg.views.authenticationChoiceScreen.AuthenticationChoiceFragment"
+        android:label="fragment_authenticatino_choice"
+        tools:layout="@layout/fragment_authenticatino_choice" >
+        <action
+            android:id="@+id/action_authenticationChoiceFragment_to_signInFragment"
+            app:destination="@id/signInFragment"
+            app:popUpTo="@id/authenticationChoiceFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_authenticationChoiceFragment_to_signUpFragment"
+            app:destination="@id/signUpFragment"
+            app:popUpTo="@id/authenticationChoiceFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 </navigation>
