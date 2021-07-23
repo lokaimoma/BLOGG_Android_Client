@@ -22,7 +22,7 @@ Created by kelvin_clark on 7/20/2021 3:58 PM
 @HiltViewModel
 class BlogListScreenViewModel @Inject constructor(
     private val repository: BloggRepository
-): ViewModel() {
+) : ViewModel() {
 
     init {
         fetchBlogs()
@@ -35,19 +35,18 @@ class BlogListScreenViewModel @Inject constructor(
     val blogList = _blogList.asLiveData()
 
     private fun fetchBlogs() = viewModelScope.launch(IO) {
-        when(val result = repository.fetchAllBlogs()){
+        when (val result = repository.fetchAllBlogs()) {
             is ResponseState.Success -> {
-                if (_blogList.value.size != result.data!!.size) {
-                    _blogList.value = result.data
-                    listEventChannel.send(BlogListEvent.FetchSuccessFull(result.data.size))
-                }else {
-                    return@launch
-                }
+                _blogList.value = result.data!!
             }
             is ResponseState.Error -> {
                 listEventChannel.send(BlogListEvent.FetchError)
             }
         }.exhaustive
+
+        if (_blogList.value.isEmpty()) {
+            listEventChannel.send(BlogListEvent.ListEmpty)
+        }
     }
 
 }
