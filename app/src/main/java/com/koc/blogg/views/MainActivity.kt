@@ -3,6 +3,7 @@ package com.koc.blogg.views
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.appcompat.widget.Toolbar
+import androidx.core.view.isVisible
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
@@ -28,5 +29,9 @@ class MainActivity : AppCompatActivity() {
         val navController = navHostFragment.findNavController()
         val appBarConfiguration = AppBarConfiguration(navController.graph)
         toolBar.setupWithNavController(navController, appBarConfiguration)
+
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            toolBar.isVisible = destination.id != R.id.splashScreenFragment
+        }
     }
 }
