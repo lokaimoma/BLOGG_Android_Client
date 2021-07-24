@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -76,7 +75,7 @@ class BlogListScreen: BaseFragment<FragmentBlogListBinding>(), BlogItemClickedLi
         FragmentBlogListBinding.inflate(layoutInflater, viewGroup, false)
 
     override fun onClicked(blogId: Int) {
-        Toast.makeText(requireContext(), "$blogId", Toast.LENGTH_SHORT).show()
+
     }
 
     override fun onDestroyView() {
