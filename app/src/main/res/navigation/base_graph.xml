@@ -60,14 +60,13 @@
         tools:layout="@layout/fragment_blog_list" >
         <action
             android:id="@+id/list_to_details"
-            app:destination="@id/blogDetailsScreen"
-            app:popUpTo="@id/blogDetailsScreen"
-            app:popUpToInclusive="true" />
+            app:destination="@id/blogDetailsScreen" />
     </fragment>
     <fragment
         android:id="@+id/blogDetailsScreen"
         android:name="com.koc.blogg.views.blogDetailsScreen.BlogDetailsScreen"
-        tools:layout="@layout/fragment_blog_details" >
+        android:label=" "
+        tools:layout="@layout/fragment_blog_details">
         <argument
             android:name="blog_id"
             app:argType="integer" />

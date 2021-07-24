@@ -24,4 +24,5 @@
     <string name="have_an_account">Have an account?</string>
     <string name="blog_list_empty">Blog List Empty</string>
     <string name="no_blogs_created_at_the_moment">No blogs created at the moment</string>
+    <string name="last_updated">Last updated :</string>
 </resources>
