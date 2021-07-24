@@ -31,6 +31,9 @@ class MainActivity : AppCompatActivity() {
         navController.addOnDestinationChangedListener { _, destination, _ ->
             toolBar.isVisible = !(destination.id == R.id.splashScreenFragment || destination.id == R.id.signInFragment ||
                     destination.id == R.id.signUpFragment)
+            if (destination.id == R.id.blogListScreen) {
+                toolBar.navigationIcon = null
+            }
         }
     }
 }
