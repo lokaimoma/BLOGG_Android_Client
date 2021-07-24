@@ -29,8 +29,9 @@ class SplashScreenFragment : BaseFragment<FragmentSplashScreenBinding>() {
         preferenceManager.userId.first {userId ->
             if (userId == null) {
                 navController.navigate(R.id.splash_screen_to_login_fragment)
+            }else {
+                navController.navigate(R.id.splash_to_blog_list)
             }
-            // else navigate to blog screen
             true
         }
     }
