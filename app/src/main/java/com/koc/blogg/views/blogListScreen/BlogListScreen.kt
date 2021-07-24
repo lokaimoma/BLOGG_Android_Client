@@ -28,7 +28,7 @@ class BlogListScreen: BaseFragment<FragmentBlogListBinding>(), BlogItemClickedLi
         super.onViewCreated(view, savedInstanceState)
         observeBlogList()
         binding.rvBlogs.apply {
-            adapter = adapter
+            adapter = blogListAdapter
             layoutManager = LinearLayoutManager(requireContext())
         }
     }
