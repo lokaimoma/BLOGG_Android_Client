@@ -13,7 +13,6 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
@@ -26,7 +25,7 @@ Created by kelvin_clark on 7/24/2021 2:55 PM
 @HiltViewModel
 class BlogDetailsViewModel @Inject constructor(
     private val repository: BloggRepository,
-    private val savedStateHandle: SavedStateHandle,
+    savedStateHandle: SavedStateHandle,
     private val preferenceManager: PreferenceManager
 ): ViewModel(){
 
