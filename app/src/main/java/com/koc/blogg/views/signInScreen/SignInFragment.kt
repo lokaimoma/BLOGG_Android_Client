@@ -34,7 +34,7 @@ class SignInFragment: BaseFragment<FragmentSignInBinding>() {
                 fragmentViewModel.loginUser()
             }
             signUp.setOnClickListener {
-                navController.navigate(R.id.signUpFragment)
+                navController.navigate(R.id.sigin_to_signUp)
             }
         }
         saveFragmentState()
