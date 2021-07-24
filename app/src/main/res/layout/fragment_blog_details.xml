@@ -3,6 +3,94 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".views.blogDetailsScreen.BlogDetailsScreen">
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/blogTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.045"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:textColor="@color/black"
+        style="@style/TextAppearance.AppCompat.Display2"
+        tools:text="Blog Title"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/lastUpdatedText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:visibility="gone"
+        tools:visibility="visible"
+        app:layout_constraintTop_toBottomOf="@id/blogTitle"
+        app:layout_constraintStart_toStartOf="@id/blogTitle"
+        style="@style/TextAppearance.MaterialComponents.Subtitle1"
+        android:text="@string/last_updated"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/lastUpdated"
+        style="@style/TextAppearance.MaterialComponents.Subtitle1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="5dp"
+        tools:text="July 2, 2020"
+        app:layout_constraintStart_toEndOf="@id/lastUpdatedText"
+        app:layout_constraintTop_toBottomOf="@id/blogTitle" />
+
+    <View
+        android:id="@+id/separator"
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:background="@color/secondary"
+        android:layout_marginTop="5dp"
+        app:layout_constraintTop_toBottomOf="@id/lastUpdated"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:elevation="10dp"
+        android:visibility="gone"
+        tools:visibility="visible"/>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/separator"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/blogBody"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:textSize="20sp"
+            style="@style/TextAppearance.MaterialComponents.Body1"
+            tools:text="Sample body"/>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <FrameLayout
+        android:id="@+id/progressIndicator"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <include
+            layout="@layout/please_wait"/>
+
+    </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
