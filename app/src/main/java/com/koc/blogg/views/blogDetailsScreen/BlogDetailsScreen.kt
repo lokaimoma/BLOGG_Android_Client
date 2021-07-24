@@ -38,9 +38,13 @@ class BlogDetailsScreen: BaseFragment<FragmentBlogDetailsBinding>() {
                 binding.apply {
                     blogTitle.text = blogDetails.blog.title
                     blogBody.text = blogDetails.blog.body
-                    val dateFormatter = SimpleDateFormat("yyy-MM-dd HH:mm:ss", Locale.getDefault())
-                    val dateTime = dateFormatter.parse(blogDetails.blog.lastUpdated)
-                    lastUpdated.text = SimpleDateFormat("MMM, dd yyyy", Locale.getDefault()).format(dateTime!!)
+                    try {
+                        val dateFormatter = SimpleDateFormat("yyy-MM-dd HH:mm:ss", Locale.getDefault())
+                        val dateTime = dateFormatter.parse(blogDetails.blog.lastUpdated)
+                        lastUpdated.text = SimpleDateFormat("MMM, dd yyyy", Locale.getDefault()).format(dateTime!!)
+                    }catch (e: Exception) {
+                        lastUpdated.text = "--"
+                    }
                 }
             }
         }
