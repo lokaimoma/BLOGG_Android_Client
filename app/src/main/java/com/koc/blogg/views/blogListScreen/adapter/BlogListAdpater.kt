@@ -28,7 +28,7 @@ class BlogListAdpater(private val itemClickedListener: BlogItemClickedListener):
     }
 
     override fun onBindViewHolder(holder: BlogListViewHolder, position: Int) {
-        TODO("Not yet implemented")
+        holder.populateViews(getItem(position))
     }
 
     fun clearBinding() {
@@ -67,6 +67,4 @@ class BlogListAdpater(private val itemClickedListener: BlogItemClickedListener):
             oldItem == newItem
 
     }
-
-
 }
