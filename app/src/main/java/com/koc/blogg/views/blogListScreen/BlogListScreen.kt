@@ -12,10 +12,13 @@ import com.koc.blogg.util.BlogItemClickedListener
 import com.koc.blogg.util.commons.BaseFragment
 import com.koc.blogg.viewModel.BlogListScreenViewModel
 import com.koc.blogg.views.blogListScreen.adapter.BlogListAdpater
+import dagger.hilt.android.AndroidEntryPoint
 
 /**
 Created by kelvin_clark on 7/24/2021 1:29 AM
  */
+
+@AndroidEntryPoint
 class BlogListScreen: BaseFragment<FragmentBlogListBinding>(), BlogItemClickedListener {
 
     private val viewModel: BlogListScreenViewModel by viewModels()
