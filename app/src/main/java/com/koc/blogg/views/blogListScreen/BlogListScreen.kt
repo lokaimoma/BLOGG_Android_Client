@@ -43,12 +43,18 @@ class BlogListScreen: BaseFragment<FragmentBlogListBinding>(), BlogItemClickedLi
         viewModel.listEvent.collect { listEvent->
             when (listEvent) {
                 is BlogListEvent.ListEmpty -> {
-                    binding.noBlogsStub.inflate()
-                    binding.rvBlogs.isVisible = false
+                    binding.apply {
+                        progressIndicator.isVisible = false
+                        noBlogsStub.inflate()
+                        rvBlogs.isVisible = false
+                    }
                 }
                 is BlogListEvent.FetchError -> {
-                    binding.networkErrorStub.inflate()
-                    binding.rvBlogs.isVisible = false
+                    binding.apply {
+                        progressIndicator.isVisible = false
+                        networkErrorStub.inflate()
+                        rvBlogs.isVisible = false
+                    }
                 }
             }.exhaustive
         }
@@ -57,6 +63,7 @@ class BlogListScreen: BaseFragment<FragmentBlogListBinding>(), BlogItemClickedLi
     private fun observeBlogList() = viewLifecycleOwner.lifecycleScope.launchWhenCreated {
         viewModel.blogList.observe(viewLifecycleOwner) {blogList ->
             if (blogList.isNotEmpty() && blogList.size != blogListAdapter.itemCount) {
+                binding.progressIndicator.isVisible = false
                 blogListAdapter.submitList(blogList)
             }
         }
@@ -70,5 +77,10 @@ class BlogListScreen: BaseFragment<FragmentBlogListBinding>(), BlogItemClickedLi
 
     override fun onClicked(blogId: Int) {
         Toast.makeText(requireContext(), "$blogId", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        blogListAdapter.clearBinding()
     }
 }
