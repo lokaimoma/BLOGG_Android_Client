@@ -60,7 +60,7 @@ class SignInFragment: BaseFragment<FragmentSignInBinding>() {
                     Snackbar.make(binding.root, getString(R.string.email_password_error), Snackbar.LENGTH_SHORT).show()
                 }
                 is LoginEvent.LoginSuccessFull -> {
-                    // TODO: Navigate to Blog List (Screen Not ready)
+                    navController.navigate(R.id.signIn_to_list)
                 }
             }.exhaustive
         }

@@ -8,8 +8,7 @@
     android:layout_marginEnd="8dp"
     android:layout_marginBottom="10dp"
     android:backgroundTint="#002E0438"
-    app:cardCornerRadius="10dp"
-    tools:context=".views.blogListScreen.BlogListScreen">
+    app:cardCornerRadius="10dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"

@@ -70,7 +70,7 @@ class SignUpFragment : BaseFragment<FragmentSignUpBinding>() {
                     Snackbar.make(binding.root, getString(R.string.email_username_exits), Snackbar.LENGTH_SHORT).show()
                 }
                 is SignUpEvent.SignUpSuccessFul -> {
-                    // TODO Navigate to blog list screen
+                    navController.navigate(R.id.signUp_to_list)
                 }
             }.exhaustive
         }
