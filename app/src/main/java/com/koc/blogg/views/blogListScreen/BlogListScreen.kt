@@ -80,6 +80,7 @@ class BlogListScreen : BaseFragment<FragmentBlogListBinding>(), BlogItemClickedL
     }
 
     override fun onDestroyView() {
+        binding.rvBlogs.adapter = null
         super.onDestroyView()
         blogListAdapter.clearBinding()
     }
