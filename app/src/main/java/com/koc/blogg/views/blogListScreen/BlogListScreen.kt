@@ -23,7 +23,7 @@ Created by kelvin_clark on 7/24/2021 1:29 AM
  */
 
 @AndroidEntryPoint
-class BlogListScreen: BaseFragment<FragmentBlogListBinding>(), BlogItemClickedListener {
+class BlogListScreen : BaseFragment<FragmentBlogListBinding>(), BlogItemClickedListener {
 
     private val viewModel: BlogListScreenViewModel by viewModels()
     private val blogListAdapter: BlogListAdpater = BlogListAdpater(this)
@@ -39,7 +39,7 @@ class BlogListScreen: BaseFragment<FragmentBlogListBinding>(), BlogItemClickedLi
     }
 
     private fun monitorFragmentEvents() = viewLifecycleOwner.lifecycleScope.launchWhenCreated {
-        viewModel.listEvent.collect { listEvent->
+        viewModel.listEvent.collect { listEvent ->
             when (listEvent) {
                 is BlogListEvent.ListEmpty -> {
                     binding.apply {
@@ -60,7 +60,7 @@ class BlogListScreen: BaseFragment<FragmentBlogListBinding>(), BlogItemClickedLi
     }
 
     private fun observeBlogList() = viewLifecycleOwner.lifecycleScope.launchWhenCreated {
-        viewModel.blogList.observe(viewLifecycleOwner) {blogList ->
+        viewModel.blogList.observe(viewLifecycleOwner) { blogList ->
             if (blogList.isNotEmpty() && blogList.size != blogListAdapter.itemCount) {
                 binding.progressIndicator.isVisible = false
                 blogListAdapter.submitList(blogList)
@@ -75,7 +75,8 @@ class BlogListScreen: BaseFragment<FragmentBlogListBinding>(), BlogItemClickedLi
         FragmentBlogListBinding.inflate(layoutInflater, viewGroup, false)
 
     override fun onClicked(blogId: Int) {
-
+        val action = BlogListScreenDirections.listToDetails(blogId = blogId)
+        navController.navigate(action)
     }
 
     override fun onDestroyView() {
