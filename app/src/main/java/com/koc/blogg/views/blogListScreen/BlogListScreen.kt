@@ -59,11 +59,20 @@ class BlogListScreen : BaseFragment<FragmentBlogListBinding>(), BlogItemClickedL
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        if (viewModel.screenHotStart) {
+            binding.progressIndicator.isVisible = false
+        }
+        viewModel.fetchBlogs()
+    }
+
     private fun observeBlogList() = viewLifecycleOwner.lifecycleScope.launchWhenCreated {
         viewModel.blogList.observe(viewLifecycleOwner) { blogList ->
             if (blogList.isNotEmpty() && blogList.size != blogListAdapter.itemCount) {
                 binding.progressIndicator.isVisible = false
                 blogListAdapter.submitList(blogList)
+                viewModel.screenHotStart = true
             }
         }
     }
