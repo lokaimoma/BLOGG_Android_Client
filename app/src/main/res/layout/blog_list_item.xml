@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="8dp"
+    android:layout_marginEnd="8dp"
+    android:layout_marginBottom="10dp"
+    android:backgroundTint="#002E0438"
+    app:cardCornerRadius="10dp"
+    tools:context=".views.blogListScreen.BlogListScreen">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="170dp"
+        android:background="@drawable/border_left">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/blogTitle"
+            style="@style/BlogTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="8dp"
+            app:layout_constraintStart_toStartOf="@id/constraintLayout"
+            app:layout_constraintTop_toTopOf="@id/constraintLayout"
+            tools:text="Sample title" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/blogBody"
+            style="@style/BlogBody"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:padding="10dp"
+            android:ellipsize="end"
+            android:maxLines="3"
+            app:layout_constraintEnd_toEndOf="@id/constraintLayout"
+            app:layout_constraintStart_toStartOf="@id/constraintLayout"
+            app:layout_constraintTop_toBottomOf="@+id/blogTitle"
+            tools:text="Sample body sfdg jksdfgjkdjsg djfsgkjsgj sjfgjsgsj fkdjgjsdkfgj skjdsfgjsdkj dsfjgkdsjgsdkjfgdjsgsjdfgjsdlg skfjgldjsgl sdjfglksfdjgs dfjgjklsds dfjgsjdkfgjkksdfgjks dfjgksdfgskdgfjskdfg" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/blogCreatedDate"
+            style="@style/BLogDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="July, 2" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>
