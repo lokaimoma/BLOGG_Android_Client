@@ -4,15 +4,20 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.koc.blogg.databinding.FragmentBlogListBinding
 import com.koc.blogg.util.BlogItemClickedListener
 import com.koc.blogg.util.commons.BaseFragment
+import com.koc.blogg.util.events.BlogListEvent
+import com.koc.blogg.util.events.exhaustive
 import com.koc.blogg.viewModel.BlogListScreenViewModel
 import com.koc.blogg.views.blogListScreen.adapter.BlogListAdpater
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
 
 /**
 Created by kelvin_clark on 7/24/2021 1:29 AM
@@ -27,9 +32,25 @@ class BlogListScreen: BaseFragment<FragmentBlogListBinding>(), BlogItemClickedLi
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         observeBlogList()
+        monitorFragmentEvents()
         binding.rvBlogs.apply {
             adapter = blogListAdapter
             layoutManager = LinearLayoutManager(requireContext())
+        }
+    }
+
+    private fun monitorFragmentEvents() = viewLifecycleOwner.lifecycleScope.launchWhenCreated {
+        viewModel.listEvent.collect { listEvent->
+            when (listEvent) {
+                is BlogListEvent.ListEmpty -> {
+                    binding.noBlogsStub.inflate()
+                    binding.rvBlogs.isVisible = false
+                }
+                is BlogListEvent.FetchError -> {
+                    binding.networkErrorStub.inflate()
+                    binding.rvBlogs.isVisible = false
+                }
+            }.exhaustive
         }
     }
 
@@ -48,6 +69,6 @@ class BlogListScreen: BaseFragment<FragmentBlogListBinding>(), BlogItemClickedLi
         FragmentBlogListBinding.inflate(layoutInflater, viewGroup, false)
 
     override fun onClicked(blogId: Int) {
-        // TODO navigate to blog details
+        Toast.makeText(requireContext(), "$blogId", Toast.LENGTH_SHORT).show()
     }
 }
