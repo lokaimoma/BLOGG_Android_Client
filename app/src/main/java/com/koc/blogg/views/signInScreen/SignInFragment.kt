@@ -13,7 +13,7 @@ import com.koc.blogg.databinding.FragmentSignInBinding
 import com.koc.blogg.util.commons.BaseFragment
 import com.koc.blogg.util.events.LoginEvent
 import com.koc.blogg.util.events.exhaustive
-import com.koc.blogg.viewModel.SignInViewModel
+import com.koc.blogg.viewModel.SignInFragmentViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 
@@ -23,15 +23,15 @@ Created by kelvin_clark on 7/23/2021 9:21 PM
 @AndroidEntryPoint
 class SignInFragment: BaseFragment<FragmentSignInBinding>() {
 
-    private val viewModel: SignInViewModel by viewModels()
+    private val fragmentViewModel: SignInFragmentViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.apply {
-            etEmail.setText(viewModel.email)
-            etPassword.setText(viewModel.password)
+            etEmail.setText(fragmentViewModel.email)
+            etPassword.setText(fragmentViewModel.password)
             loginBtn.setOnClickListener {
-                viewModel.loginUser()
+                fragmentViewModel.loginUser()
             }
             signUp.setOnClickListener {
                 navController.navigate(R.id.signUpFragment)
@@ -42,7 +42,7 @@ class SignInFragment: BaseFragment<FragmentSignInBinding>() {
     }
 
     private fun monitorFragmentEvents() = viewLifecycleOwner.lifecycleScope.launchWhenCreated {
-        viewModel.loginEvent.collect {loginEvent ->
+        fragmentViewModel.loginEvent.collect { loginEvent ->
             when(loginEvent) {
                 is LoginEvent.InvalidEmail -> {
                     binding.etEmail.error = getString(R.string.email_invalid)
@@ -57,7 +57,7 @@ class SignInFragment: BaseFragment<FragmentSignInBinding>() {
                     }
                 }
                 is LoginEvent.ErrorLogin -> {
-                    Snackbar.make(binding.root, getString(R.string.server_error), Snackbar.LENGTH_SHORT).show()
+                    Snackbar.make(binding.root, getString(R.string.email_password_error), Snackbar.LENGTH_SHORT).show()
                 }
                 is LoginEvent.LoginSuccessFull -> {
                     // TODO: Navigate to Blog List (Screen Not ready)
@@ -70,10 +70,10 @@ class SignInFragment: BaseFragment<FragmentSignInBinding>() {
     private fun saveFragmentState() {
         binding.apply {
             etEmail.doOnTextChanged { text, _, _, _ ->
-                viewModel.email = text.toString()
+                fragmentViewModel.email = text.toString()
             }
             etPassword.doOnTextChanged { text, _, _, _ ->
-                viewModel.password = text.toString()
+                fragmentViewModel.password = text.toString()
             }
         }
     }
