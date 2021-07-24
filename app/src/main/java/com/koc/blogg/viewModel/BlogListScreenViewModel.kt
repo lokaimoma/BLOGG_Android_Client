@@ -24,17 +24,14 @@ class BlogListScreenViewModel @Inject constructor(
     private val repository: BloggRepository
 ) : ViewModel() {
 
-    init {
-        fetchBlogs()
-    }
-
     private val listEventChannel = Channel<BlogListEvent>()
     val listEvent = listEventChannel.receiveAsFlow()
 
     private var _blogList: MutableStateFlow<List<Blog>> = MutableStateFlow(listOf())
+    var screenHotStart = false
     val blogList = _blogList.asLiveData()
 
-    private fun fetchBlogs() = viewModelScope.launch(IO) {
+    fun fetchBlogs() = viewModelScope.launch(IO) {
         when (val result = repository.fetchAllBlogs()) {
             is ResponseState.Success -> {
                 if (result.data!!.isEmpty()) {
