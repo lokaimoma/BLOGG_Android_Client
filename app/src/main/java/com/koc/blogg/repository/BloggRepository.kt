@@ -3,13 +3,13 @@ package com.koc.blogg.repository
 import android.content.Context
 import com.koc.blogg.R
 import com.koc.blogg.model.remote.Blog
+import com.koc.blogg.model.remote.BlogDetails
 import com.koc.blogg.model.remote.UserLogin
 import com.koc.blogg.model.remote.UserPost
 import com.koc.blogg.remote.BloggService
 import com.koc.blogg.util.ResponseState
 import com.koc.blogg.util.events.exhaustive
 import dagger.hilt.android.qualifiers.ApplicationContext
-import kotlinx.coroutines.flow.Flow
 import retrofit2.HttpException
 import javax.inject.Inject
 
@@ -74,6 +74,15 @@ class BloggRepository @Inject constructor(
             ResponseState.Success(result)
         } catch (throwable: Throwable) {
             throwable.printStackTrace()
+            ResponseState.Error(message = context.getString(R.string.server_error))
+        }
+    }
+
+    suspend fun fetchBlog(blogId: Int, currentUserId: Int): ResponseState<BlogDetails> {
+        return try {
+            val result = api.getBlogDetails(blogId = blogId, currentUserId = currentUserId)
+            ResponseState.Success(data = result)
+        }catch (throwable: Throwable) {
             ResponseState.Error(message = context.getString(R.string.server_error))
         }
     }
