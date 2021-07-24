@@ -28,7 +28,7 @@ class SplashScreenFragment : BaseFragment<FragmentSplashScreenBinding>() {
     private fun checkIfUserHasLogin()= viewLifecycleOwner.lifecycleScope.launchWhenCreated {
         preferenceManager.userId.first {userId ->
             if (userId == null) {
-                navController.navigate(R.id.signInFragment)
+                navController.navigate(R.id.splash_screen_to_login_fragment)
             }
             // else navigate to blog screen
             true

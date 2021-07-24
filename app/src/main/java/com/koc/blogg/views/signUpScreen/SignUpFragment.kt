@@ -36,7 +36,7 @@ class SignUpFragment : BaseFragment<FragmentSignUpBinding>() {
                 viewModel.registerUser()
             }
             login.setOnClickListener {
-                navController.navigate(R.id.signInFragment)
+                navController.navigate(R.id.signUp_to_signin)
             }
         }
         saveFragmentState()

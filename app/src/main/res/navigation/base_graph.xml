@@ -11,7 +11,7 @@
         android:label="fragment_splash_screen"
         tools:layout="@layout/fragment_splash_screen" >
         <action
-            android:id="@+id/action_splashScreenFragment_to_signInFragment2"
+            android:id="@+id/splash_screen_to_login_fragment"
             app:destination="@id/signInFragment"
             app:popUpTo="@id/splashScreenFragment"
             app:popUpToInclusive="true" />
@@ -21,9 +21,9 @@
         android:name="com.koc.blogg.views.signInScreen.SignInFragment"
         android:label="SignInFragment" >
         <action
-            android:id="@+id/action_signInFragment_to_signUpFragment"
+            android:id="@+id/sigin_to_signUp"
             app:destination="@id/signUpFragment"
-            app:popUpTo="@id/signInFragment"
+            app:popUpTo="@id/signUpFragment"
             app:popUpToInclusive="true" />
     </fragment>
     <fragment
@@ -31,9 +31,9 @@
         android:name="com.koc.blogg.views.signUpScreen.SignUpFragment"
         android:label="SignUpFragment" >
         <action
-            android:id="@+id/action_signUpFragment_to_signInFragment"
+            android:id="@+id/signUp_to_signin"
             app:destination="@id/signInFragment"
-            app:popUpTo="@id/signUpFragment"
+            app:popUpTo="@id/signInFragment"
             app:popUpToInclusive="true" />
     </fragment>
 </navigation>
